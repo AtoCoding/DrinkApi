@@ -1,0 +1,17 @@
+tr:hover {
+    cursor: pointer;
+    background-color: #f1f1f1; /* Tô màu nền khi hover để dễ nhận diện */
+}
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+}
