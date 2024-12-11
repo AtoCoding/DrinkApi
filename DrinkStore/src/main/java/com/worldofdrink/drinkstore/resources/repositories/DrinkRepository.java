@@ -66,7 +66,7 @@ public class DrinkRepository {
         try {
             con = DBUtils.makeConnection();
             if (con != null) {
-                String query = "select Drink.DrinkId, Drink.DrinkName, Drink.Quantity, Brand.BrandName, Category.CategoryName, DrinkSize.UnitPrice, Size.SizeId, Size.SizeType "
+                String query = "select Drink.DrinkId, Drink.DrinkName, DrinkSize.Quantity, Brand.BrandName, Category.CategoryName, DrinkSize.UnitPrice, Size.SizeId, Size.SizeType "
                         + "from Drink "
                         + "join Brand on Drink.BrandId = Brand.BrandId "
                         + "join Category on Drink.CategoryId = Category.CategoryId "
