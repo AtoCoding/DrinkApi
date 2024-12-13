@@ -142,10 +142,10 @@ async function modifyData(action, drinkId, sizeId) {
         try {
             const brandResponse = await getBrandList();
             const categoryResponse = await getCategoryList();
-//            const sizeResponse = await getSizeList();
+            const sizeResponse = await getSizeList();
             const brandData = brandResponse.data.data;
             const categoryData = categoryResponse.data.data;
-//            const sizeData = sizeResponse.data.data;
+            const sizeData = sizeResponse.data.data;
             
             const cellBrandName = document.getElementById("brand-name");
             for(let i = 0; i < brandData.length; i++) {
@@ -165,14 +165,14 @@ async function modifyData(action, drinkId, sizeId) {
                 cellCategoryName.appendChild(option);
             }
             
-//            const cellSizeType = document.getElementById("size-type");
-//            for(let i = 0; i < sizeData.length; i++) {
-//                const option = document.createElement("option");
-//                const optionSelectedValue = cellSizeType.value;
-//                option.value = sizeData[i].sizeId;
-//                option.textContent = sizeData[i].sizeType;
-//                cellSizeType.appendChild(option);
-//            }
+            const cellSizeType = document.getElementById("size-type");
+            for(let i = 0; i < sizeData.length; i++) {
+                const option = document.createElement("option");
+                const optionSelectedValue = cellSizeType.value;
+                option.value = sizeData[i].sizeId;
+                option.textContent = sizeData[i].sizeType;
+                cellSizeType.appendChild(option);
+            }
         } catch (error) {
             alert(error);
         }
