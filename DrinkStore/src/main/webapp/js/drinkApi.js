@@ -116,10 +116,6 @@ async function getDrinkDetails(drinkId, sizeId) {
 
 async function modifyData(action, drinkId, sizeId) {
     if(action === "update") {
-        const brandApiUrl = "/DrinkStore/v1/brand/";
-        const categoryApiUrl = "/DrinkStore/v1/drink/category/";
-        const sizeApiUrl = "/DrinkStore/v1/drink/size/";
-        
         const cellDrinkName = document.getElementById("drink-name");
         cellDrinkName.removeAttribute("disabled");
         
@@ -146,13 +142,10 @@ async function modifyData(action, drinkId, sizeId) {
         try {
             const brandResponse = await getBrandList();
             const categoryResponse = await getCategoryList();
-            const sizeResponse = await getSizeList();
-            console.log(brandResponse);
+//            const sizeResponse = await getSizeList();
             const brandData = brandResponse.data.data;
-            console.log(categoryResponse);
             const categoryData = categoryResponse.data.data;
-            console.log(sizeResponse);
-            const sizeData = sizeResponse.data.data;
+//            const sizeData = sizeResponse.data.data;
             
             const cellBrandName = document.getElementById("brand-name");
             for(let i = 0; i < brandData.length; i++) {
@@ -162,6 +155,24 @@ async function modifyData(action, drinkId, sizeId) {
                 option.textContent = brandData[i].brandName;
                 cellBrandName.appendChild(option);
             }
+            
+            const cellCategoryName = document.getElementById("category-name");
+            for(let i = 0; i < categoryData.length; i++) {
+                const option = document.createElement("option");
+                const optionSelectedValue = cellCategoryName.value;
+                option.value = categoryData[i].categoryId;
+                option.textContent = categoryData[i].categoryName;
+                cellCategoryName.appendChild(option);
+            }
+            
+//            const cellSizeType = document.getElementById("size-type");
+//            for(let i = 0; i < sizeData.length; i++) {
+//                const option = document.createElement("option");
+//                const optionSelectedValue = cellSizeType.value;
+//                option.value = sizeData[i].sizeId;
+//                option.textContent = sizeData[i].sizeType;
+//                cellSizeType.appendChild(option);
+//            }
         } catch (error) {
             alert(error);
         }

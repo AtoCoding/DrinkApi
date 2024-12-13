@@ -1,6 +1,10 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
-
+async function getCategoryList() {
+    const apiUrl = "/DrinkStore/v1/category/";
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch(error) {
+        alert(error);
+        console.log(error);
+    }
+}
