@@ -21,3 +21,54 @@ th {
     font-size: 14px;
     color: #333;
 }
+
+#update-button:hover {
+    cursor: pointer;
+    background-color: lightblue;
+    
+}
+
+#update-button:hover span {
+    color: white;
+}
+
+#update-button {
+    text-align: center;
+}
+
+#update-button span {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+#delete-button:hover {
+    cursor: pointer;
+    background-color: lightcoral;
+    
+}
+
+#delete-button:hover span {
+    color: white;
+}
+
+#delete-button {
+    text-align: center;
+}
+
+#delete-button span {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+.inputInTable {
+    width: 100%; 
+    border: none;
+    padding: 5px;
+}
+
+input:disabled {
+    background-color: transparent;
+}
+

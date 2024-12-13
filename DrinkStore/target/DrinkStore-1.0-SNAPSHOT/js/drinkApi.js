@@ -62,38 +62,111 @@ async function navigateToDetailsPage(drinkId, sizeId) {
 
 async function getDrinkDetails(drinkId, sizeId) {
     const apiUrl = "/DrinkStore/v1/drink/details?drinkId=" + encodeURIComponent(drinkId) + "&sizeId=" + encodeURIComponent(sizeId);
-    console.log("Loading");
     try {
-        console.log("Loading");
         const response = await axios.get(apiUrl);
-        console.log(response);
+//        console.log(response);
+        
+        const drinkId = response.data.data.drinkId;
+        const sizeId = response.data.data.sizeId;
         
         const cellDrinkId = document.getElementById("drink-id");
-        cellDrinkId.textContent = response.data.data.drinkId;
+        cellDrinkId.textContent = drinkId;
         
         const cellDrinkName = document.getElementById("drink-name");
-        cellDrinkName.textContent = response.data.data.drinkName;
+        cellDrinkName.value = response.data.data.drinkName;
         
         const cellQuantity = document.getElementById("quantity");
-        cellQuantity.textContent = response.data.data.quantity;
+        cellQuantity.value = response.data.data.quantity;
         
         const cellBrandName = document.getElementById("brand-name");
-        cellBrandName.textContent = response.data.data.brandName;
+        const optionBrandName = document.createElement("option");
+        optionBrandName.value = response.data.data.brandId;
+        optionBrandName.textContent = response.data.data.brandName;
+        optionBrandName.setAttribute("selected", "true");
+        cellBrandName.appendChild(optionBrandName);
         
         const cellCategoryName = document.getElementById("category-name");
-        cellCategoryName.textContent = response.data.data.categoryName;
+        const optionCategoryName = document.createElement("option");
+        optionCategoryName.value = response.data.data.categoryId;
+        optionCategoryName.textContent = response.data.data.categoryName;
+        optionCategoryName.setAttribute("selected", "true");
+        cellCategoryName.appendChild(optionCategoryName);
         
         const cellUnitPrice = document.getElementById("unit-price");
-        cellUnitPrice.textContent = response.data.data.unitPrice;
-        
-        const cellSizeId = document.getElementById("size-id");
-        cellSizeId.textContent = response.data.data.sizeId;
+        cellUnitPrice.value = response.data.data.unitPrice;
         
         const cellSizeType = document.getElementById("size-type");
-        cellSizeType.textContent = response.data.data.sizeType;
+        const optionSizeType = document.createElement("option");
+        optionSizeType.value = response.data.data.sizeId;
+        optionSizeType.textContent = response.data.data.sizeType;
+        optionSizeType.setAttribute("selected", "true");
+        cellSizeType.appendChild(optionSizeType);
+        
+        const cellUpdateButton = document.getElementById("update-button");
+        cellUpdateButton.setAttribute("onclick", "modifyData('update', " + drinkId + ", " + sizeId + ")");
+        
+        const cellDeleteButton = document.getElementById("delete-button");
+        cellDeleteButton.setAttribute("onclick", "modifyData('delete', " + drinkId + ", " + sizeId + ")");
         
     } catch (error) {
         alert(error);
+        console.log(error);
+    }
+}
+
+async function modifyData(action, drinkId, sizeId) {
+    if(action === "update") {
+        const brandApiUrl = "/DrinkStore/v1/brand/";
+        const categoryApiUrl = "/DrinkStore/v1/drink/category/";
+        const sizeApiUrl = "/DrinkStore/v1/drink/size/";
+        
+        const cellDrinkName = document.getElementById("drink-name");
+        cellDrinkName.removeAttribute("disabled");
+        
+        const cellQuantity = document.getElementById("quantity");
+        cellQuantity.removeAttribute("disabled");
+        
+        const cellBrandName = document.getElementById("brand-name");
+        cellBrandName.removeAttribute("disabled");
+        
+        const cellCategoryName = document.getElementById("category-name");
+        cellCategoryName.removeAttribute("disabled");
+        
+        const cellUnitPrice = document.getElementById("unit-price");
+        cellUnitPrice.removeAttribute("disabled");
+        
+        const cellSizeType = document.getElementById("size-type");
+        cellSizeType.removeAttribute("disabled");
+        
+        const txtUpdate = document.getElementById("txtUpdate");
+        txtUpdate.textContent = "Confirm update";
+        const btnUpdate = document.getElementById("update-button");
+        btnUpdate.setAttribute("onclick", "confirmModifyData('update', " + drinkId + ", " + sizeId + ")");
+        
+        try {
+            const brandResponse = await getBrandList();
+            const categoryResponse = await getCategoryList();
+            const sizeResponse = await getSizeList();
+            console.log(brandResponse);
+            const brandData = brandResponse.data.data;
+            console.log(categoryResponse);
+            const categoryData = categoryResponse.data.data;
+            console.log(sizeResponse);
+            const sizeData = sizeResponse.data.data;
+            
+            const cellBrandName = document.getElementById("brand-name");
+            for(let i = 0; i < brandData.length; i++) {
+                const option = document.createElement("option");
+                const optionSelectedValue = cellBrandName.value;
+                option.value = brandData[i].brandId;
+                option.textContent = brandData[i].brandName;
+                cellBrandName.appendChild(option);
+            }
+        } catch (error) {
+            alert(error);
+        }
+    } else if(action === "delete") {
+        
     }
 }
 
