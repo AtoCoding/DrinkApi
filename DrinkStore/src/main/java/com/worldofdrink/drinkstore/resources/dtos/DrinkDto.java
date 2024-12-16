@@ -13,7 +13,9 @@ public class DrinkDto {
     private int drinkId;
     private String drinkName;
     private int quantity;
+    private int brandId;
     private String brandName;
+    private int categoryId;
     private String categoryName;
     private double unitPrice;
     private int sizeId;
@@ -26,24 +28,28 @@ public class DrinkDto {
         this.drinkId = drinkId;
         this.drinkName = drinkName;
         this.quantity = 0;
+        this.brandId = 0;
         this.brandName = brandName;
+        this.categoryId = 0;
         this.categoryName = "None";
         this.unitPrice = unitPrice;
         this.sizeId = sizeId;
         this.sizeType = "None";
     }
 
-    public DrinkDto(int drinkId, String drinkName, int quantity, String brandName, String categoryName, double unitPrice, int sizeId, String sizeType) {
+    public DrinkDto(int drinkId, String drinkName, int quantity, int brandId, String brandName, int categoryId, String categoryName, double unitPrice, int sizeId, String sizeType) {
         this.drinkId = drinkId;
         this.drinkName = drinkName;
         this.quantity = quantity;
+        this.brandId = brandId;
         this.brandName = brandName;
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.unitPrice = unitPrice;
         this.sizeId = sizeId;
         this.sizeType = sizeType;
     }
-    
+
     public int getDrinkId() {
         return drinkId;
     }
@@ -68,12 +74,28 @@ public class DrinkDto {
         this.quantity = quantity;
     }
 
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
     public String getBrandName() {
         return brandName;
     }
 
     public void setBrandName(String brandName) {
         this.brandName = brandName;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {
@@ -110,7 +132,7 @@ public class DrinkDto {
 
     @Override
     public String toString() {
-        return "DrinkDto{" + "drinkId=" + drinkId + ", drinkName=" + drinkName + ", quantity=" + quantity + ", brandName=" + brandName + ", categoryName=" + categoryName + ", unitPrice=" + unitPrice + ", sizeId=" + sizeId + ", sizeType=" + sizeType + '}';
+        return "DrinkDto{" + "drinkId=" + drinkId + ", drinkName=" + drinkName + ", quantity=" + quantity + ", brandId=" + brandId + ", brandName=" + brandName + ", categoryId=" + categoryId + ", categoryName=" + categoryName + ", unitPrice=" + unitPrice + ", sizeId=" + sizeId + ", sizeType=" + sizeType + '}';
     }
 
 }

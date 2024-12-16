@@ -45,6 +45,7 @@ go
 insert into Size(SizeType) values (N'Nhỏ'), (N'Trung'), (N'Đại');
 insert into Category(CategoryName) values (N'Nước ngọt'), (N'Soda');
 insert into Brand(BrandName) values (N'PepsiCo'), (N'The Coca-Cola Company'), (N'SFC');
+
 insert into Drink(DrinkName, BrandId, CategoryId) values 
 (N'Sting đỏ', 1, 1),
 (N'Sting vàng', 1, 1),

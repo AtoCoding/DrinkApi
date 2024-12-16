@@ -5,7 +5,10 @@
 package com.worldofdrink.drinkstore.resources.services;
 
 import com.worldofdrink.drinkstore.resources.dtos.DrinkDto;
+import com.worldofdrink.drinkstore.resources.dtos.NewDrinkDto;
 import com.worldofdrink.drinkstore.resources.repositories.DrinkRepository;
+import com.worldofdrink.drinkstore.resources.utils.DBUtils;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,17 +17,22 @@ import java.util.List;
  * @author Ato
  */
 public class DrinkService {
+
     private final DrinkRepository drinkRepository;
-    
+
     public DrinkService() {
         drinkRepository = new DrinkRepository();
     }
-    
+
     public List<DrinkDto> getDrinkList() throws SQLException, ClassNotFoundException {
         return drinkRepository.getDrinkList();
     }
-    
+
     public DrinkDto getDrinkDetails(int drinkId, int sizeId) throws SQLException, ClassNotFoundException {
         return drinkRepository.getDrinkDetails(drinkId, sizeId);
+    }
+
+    public boolean createDrink(NewDrinkDto newDrinkDto) throws ClassNotFoundException, SQLException {
+        return drinkRepository.createDrink(newDrinkDto);
     }
 }

@@ -54,13 +54,12 @@ async function getDrinkList() {
         console.log(error);
     }
 }
-;
 
 async function navigateToDetailsPage(drinkId, sizeId) {
     window.location.assign("drink-details.html?drinkId=" + encodeURIComponent(drinkId) + "&sizeId=" + encodeURIComponent(sizeId));
 }
 
-async function getDrinkDetails(drinkId, sizeId) {
+async function getDrinkDetails(drinkId, sizeId) { //"/details?drinkId=2&sizeId=1"
     const apiUrl = "/DrinkStore/v1/drink/details?drinkId=" + encodeURIComponent(drinkId) + "&sizeId=" + encodeURIComponent(sizeId);
     try {
         const response = await axios.get(apiUrl);
@@ -181,4 +180,50 @@ async function modifyData(action, drinkId, sizeId) {
     }
 }
 
+async function confirmModifyData(action, drinkId, sizeId) {
+        const btnAction = document.getElementById("buttn")
+    
+        const cellDrinkName = document.getElementById("drink-name");
+        console.log(cellDrinkName.value);
+        
+        const cellQuantity = document.getElementById("quantity");
+        console.log(cellQuantity.value);
+        
+        const cellBrandName = document.getElementById("brand-name");
+        console.log(cellBrandName.value);
+        console.log(cellBrandName.options[cellBrandName.selectedIndex].textContent);
+        
+        const cellCategoryName = document.getElementById("category-name");
+        console.log(cellCategoryName.value);
+        console.log(cellCategoryName.options[cellCategoryName.selectedIndex].textContent);
+        
+        const cellUnitPrice = document.getElementById("unit-price");
+        console.log(cellUnitPrice.value);
+        
+        const cellSizeType = document.getElementById("size-type");
+        console.log(cellSizeType.value);
+        console.log(cellSizeType.options[cellSizeType.selectedIndex].textContent);
+}
 
+async function createDrink() {
+    const apiUrl = "/DrinkStore/v1/drink/create";
+    try {
+        const response = await axios.post(apiUrl, {
+            drinkName: "Boncha Đào",
+            quantityList: [45, 43],
+            brandId: 1,
+            categoryId: 2,
+            unitPriceList: [
+              11000,
+              15000
+            ],
+            sizeList: [
+              1,
+              3
+            ]
+        });
+        console.log("Loading");
+    } catch(error) {
+        console.log(error);
+    }
+}

@@ -6,11 +6,13 @@ package com.worldofdrink.drinkstore.resources.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.worldofdrink.drinkstore.resources.dtos.DrinkDto;
+import com.worldofdrink.drinkstore.resources.dtos.NewDrinkDto;
 import com.worldofdrink.drinkstore.resources.services.DrinkService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -38,7 +40,6 @@ public class DrinkController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         String path = request.getPathInfo();
-        System.out.println(path);
         try {
             switch (path) {
                 case "/": {
@@ -87,11 +88,38 @@ public class DrinkController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
+        //Để đọc body trong HTTP Request thì ko sử dụng dc request.getParameter();
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = request.getReader()) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            NewDrinkDto newDrinkDto = objectMapper.readValue(
+                    stringBuilder.toString(),
+                    NewDrinkDto.class);
+
+            boolean isDrinkCreated = drinkService.createDrink(newDrinkDto);
+//            if (true) {
+//                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//                response.getWriter().write("Tạo không thành công!");
+//            }
+        } catch (IOException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DrinkController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
 
     }
 }

@@ -4,7 +4,7 @@ join Brand on Drink.BrandId = Brand.BrandId
 join DrinkSize on Drink.DrinkId = DrinkSize.DrinkId
 join Size on DrinkSize.SizeId = Size.SizeId;
 
-select Drink.DrinkId, Drink.DrinkName, DrinkSize.Quantity, Brand.BrandName, Category.CategoryName, DrinkSize.UnitPrice, Size.SizeId, Size.SizeType
+select Drink.DrinkId as 'abc', Drink.DrinkName, DrinkSize.Quantity, Brand.BrandName, Category.CategoryName, DrinkSize.UnitPrice, Size.SizeId, Size.SizeType
 from Drink
 join Brand on Drink.BrandId = Brand.BrandId
 join Category on Drink.CategoryId = Category.CategoryId
